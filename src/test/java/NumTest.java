@@ -97,6 +97,10 @@ public class NumTest {
         }
     }
 
+    /*
+    Для этого теста необходимо ввести в файл TestNumber.txt, который находится в корне проекта в папке TestFolder, следующее
+    "число"="число прописью".
+     */
     @Test
     public void testConvertDataFromFile() throws Exception {
         String tmpLineStr;
