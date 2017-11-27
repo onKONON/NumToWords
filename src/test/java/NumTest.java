@@ -3,28 +3,29 @@ import hello.Num;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 import java.io.*;
 import java.util.Objects;
 
-import static org.junit.Assert.assertEquals;
-
 public class NumTest {
 
-    private BufferedReader br = null;
+    Num num = new Num();
+
+    private BufferedReader buffReader = null;
 
     @Before
-    public void setUp() throws Exception {
-        br = new BufferedReader(new InputStreamReader(
+    public void buffStart() throws Exception {
+        buffReader = new BufferedReader(new InputStreamReader(
                 new FileInputStream("TestFolder/TestNumber.txt"), "UTF8"));
     }
 
     @After
-    public void tearDown() throws Exception {
-        if (br != null) {
-            br.close();
+    public void buffClose() throws Exception {
+        if (buffReader != null) {
+            buffReader.close();
         }
-        br = null;
+        buffReader = null;
     }
 
     @Test
@@ -38,7 +39,7 @@ public class NumTest {
 
         for (int i = 0; i < 20; i++) {
             assertEquals(" Error in the numbers  0-19", nameNum[i],
-                    Num.toString(i));
+                    num.NumToString(i));
             System.out.println(i + " = " + nameNum[i]);
         }
     }
@@ -56,7 +57,7 @@ public class NumTest {
 
         for (int i = 0; i < 8; i++) {
             assertEquals(" Error in the numbers  20-999", nameNum[i],
-                    Num.toString(numbers[i]));
+                    num.NumToString(numbers[i]));
             System.out.println(numbers[i] + " = " + nameNum[i]);
         }
     }
@@ -75,7 +76,7 @@ public class NumTest {
 
         for (int i = 0; i < 3; i++) {
             assertEquals(" Error in the big numbers", nameNum[i],
-                    Num.toString(numbers[i]));
+                    num.NumToString(numbers[i]));
             System.out.println(numbers[i] + " = " + nameNum[i]);
         }
     }
@@ -92,7 +93,7 @@ public class NumTest {
 
         for (int i = 0; i < 4; i++) {
             assertEquals(" Error in the numbers exist units 1/2", nameNum[i],
-                    Num.toString(numbers[i]));
+                    num.NumToString(numbers[i]));
             System.out.println(numbers[i] + " = " + nameNum[i]);
         }
     }
@@ -107,12 +108,12 @@ public class NumTest {
         String numbers[];
         System.out.println();
         System.out.println("Junit test: Convert Data From .txt File");
-        while ((tmpLineStr = br.readLine()) != null) {
+        while ((tmpLineStr = buffReader.readLine()) != null) {
             if (!Objects.equals(tmpLineStr, "")) {
                 numbers = tmpLineStr.split("=");
                 long myNumbers = new Long(numbers[0]);
-                assertEquals("Error in the equals on file",numbers[1],Num.toString(myNumbers));
-                System.out.println(numbers[0] + " = " + Num.toString(myNumbers));
+                assertEquals("Error in the equals on file",numbers[1],num.NumToString(myNumbers));
+                System.out.println(numbers[0] + " = " + num.NumToString(myNumbers));
             }
         }
     }
